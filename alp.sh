@@ -1,7 +1,7 @@
 #!/bin/bash
 # ALP - Apache Log Parser
 # 9/Oct/2015 - https://github.com/JacobsLadd3r/alp/
-# 20/Aug/2016 - Picking back up
+# 20/Aug/2016 - Picking back up again
 
 function parse {
  mkdir -p /dev/shm/alp
