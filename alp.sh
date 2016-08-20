@@ -9,7 +9,7 @@ function parse {
  if [ -z "$2" ]; then SHOW=10; else SHOW=$2; fi; \
  if [ -z "$3" ]; then MINSAGO=$(date "+%d/%b/%Y:%H:%M" --date="$MIN min ago" | sed 's#/#\\/#g'); else MINSAGO=$(echo $3 | sed 's#/#\\/#g'); fi; \
  if [ -z "$4" ]; then NOW=$(date "+%d/%b/%Y:%H:%M" | sed 's#/#\\/#g'); else NOW=$(echo $4 | sed 's#/#\\/#g'); fi; \
- for log in $(ls -1 ~/log/*/*nginx*access*log.1); \
+ for log in $(lsof -ln | awk '$4 ~ /[0-9]w/ && $5 ~ /REG/ {FILE[$NF]++}END{for (i in FILE) print i}' | grep access); \ 
  do \
  LOG=$(echo $log | awk -F "/" '{print $NF}'); \
  HITS=$(tail -10000 $log | awk "/$MINSAGO/,/$NOW/ {print}"); \
